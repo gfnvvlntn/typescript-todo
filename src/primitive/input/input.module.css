@@ -1,0 +1,12 @@
+.inp {
+    width: 70%;
+    border: none;
+    background-color: inherit;
+    color: white;
+    outline: none;
+    font-size: 20px;
+}
+
+.inp::placeholder {
+    font-size: 14px;
+}

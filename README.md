@@ -1,1 +1,1 @@
-# typescript-todo
+TODO class or function

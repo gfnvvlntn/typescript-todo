@@ -1,65 +1,19 @@
-import React, {Component} from "react";
-import styles from './todo.module.css'
+import React from "react";
 
-import CreateTodoForm from "../../form/CreateTodoForm";
-import BodyTodos from "../../component/BodyTodos";
-import ItemTodoList from "../../component/todo-item-list/TodoItemList";
+import CreateTodoForm from "form/CreateTodoForm";
+import BodyTodos from "component/BodyTodos";
+import TodoList from "component/todo-list/TodoList";
 
-interface TodoItem {
-    title: string;
-    isDone: boolean;
-    id: number;
-}
+import styles from "./todo.module.css";
 
-interface TodosState {
-    todoList: TodoItem[];
-}
+const Todos = () => {
+  return (
+    <div className={styles.container}>
+      <CreateTodoForm />
+      <BodyTodos />
+      <TodoList />
+    </div>
+  );
+};
 
-class Todos extends Component<{}, TodosState> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            todoList: [],
-        };
-    }
-
-
-    createTodoItem = (newItem: {
-        title: string;
-        isDone: boolean;
-        id: number;
-    }): void => {
-        this.setState({
-            todoList: [
-                {
-                    title: newItem.title,
-                    isDone: newItem.isDone,
-                    id: newItem.id,
-                },
-                ...this.state.todoList,
-            ],
-        });
-    };
-
-    updateTodo = (list: TodoItem[]) => {
-        this.setState({todoList: [...list]});
-    }
-
-    render() {
-        return (
-            <div className={styles.container}>
-                <CreateTodoForm createTodoItem={this.createTodoItem}/>
-                <BodyTodos
-                    todoList={this.state.todoList}
-                    updateTodo={this.updateTodo}
-                />
-                <ItemTodoList
-                    todoList={this.state.todoList}
-                    updateTodo={this.updateTodo}
-                />
-            </div>
-        );
-    }
-}
-
-export default Todos;
+export default React.memo(Todos);

@@ -1,78 +1,38 @@
-import React, {Component} from "react";
-import styles from './bodyTodo.module.css'
+import React, { useState } from "react";
+import styles from "./bodyTodo.module.css";
+import Button from "primitive/button/Button";
+import Checkbox from "primitive/checkbox/Checkbox";
+import { useAppDispatch } from "store/hooks";
+import { selectAllTodoItem, deleteAllSelectedTodoItem } from "store/slice";
 
-type Todolist = {
-    title: string
-    isDone: boolean
-    id: number
-}
+const BodyTodos = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useAppDispatch();
 
-interface BodyTodosProps {
-    todoList: Todolist[];
-    updateTodo: (list: Todolist[]) => void
-}
+  const handleChange = () => {
+    setIsChecked(!isChecked);
+    dispatch(selectAllTodoItem(isChecked));
+  };
 
-interface BodyTodosState {
-    isChecked: boolean
-}
-
-class BodyTodos extends Component<BodyTodosProps, BodyTodosState> {
-    state = {isChecked: false,};
-
-    deleteAllSelectTodoItem = ():void => {
-        let list = this.props.todoList.filter((el) => !el.isDone);
-        this.props.updateTodo(list)
-    };
-
-    selectAllTodoItem = (checked: boolean):void => {
-        let list = [...this.props.todoList]
-        list.forEach((el) => {
-            el.isDone = !checked;
-            this.props.updateTodo(list)
-        });
-    };
-
-
-    handleChange = () => {
-        this.setState({isChecked: !this.state.isChecked})
+  const handleButtonClick = () => {
+    dispatch(deleteAllSelectedTodoItem());
+    if (isChecked) {
+      setIsChecked(!isChecked);
     }
+  };
 
-    handleInputClick = () => {
-        this.selectAllTodoItem(this.state.isChecked)
-    }
+  return (
+    <>
+      <div className={styles.content}>
+        <h2>todo list</h2>
+        <div className={styles.title}>
+          <Checkbox checked={isChecked} onChange={handleChange} />
+          <Button onClick={handleButtonClick}>DELETE ALL</Button>
+        </div>
+      </div>
+      <hr />
+    </>
+  );
+};
 
-    handleButtonClick = () => {
-        this.deleteAllSelectTodoItem();
-        if (this.state.isChecked) {
-            this.setState({isChecked: !this.state.isChecked})
-        }
-    }
-
-
-
-
-
-    render() {
-        return (
-            <>
-                <div className={styles.content}>
-                    <h2>todo list</h2>
-                    <div className={styles.title}>
-                        <input
-                            type="checkbox"
-                            checked={this.state.isChecked}
-                            onChange={this.handleChange}
-                            onClick={this.handleInputClick}
-                        />
-                        <button onClick={this.handleButtonClick}>
-                            delete all done
-                        </button>
-                    </div>
-                </div>
-                <hr/>
-            </>
-        );
-    }
-}
-
-export default BodyTodos;
+export default React.memo(BodyTodos);
