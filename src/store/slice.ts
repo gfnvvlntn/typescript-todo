@@ -11,6 +11,7 @@ const slice = createSlice({
       state.todoList.unshift(action.payload);
     },
     deleteAllSelectedTodoItem(state) {
+      if (state.todoList.length === 0) return;
       state.todoList = state.todoList.filter((el) => !el.isDone);
     },
     selectAllTodoItem(state, action) {

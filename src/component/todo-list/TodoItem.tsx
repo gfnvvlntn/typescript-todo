@@ -17,7 +17,7 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
   const dispatch = useAppDispatch();
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(selectTodoItem({ checked: e.target.checked, id: e.target.id }));
+    dispatch(selectTodoItem({ checked: e.target.checked, id: todoElement.id }));
   };
 
   const onDelete = () => {
@@ -30,7 +30,6 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
       <div className={styles.todoButtons}>
         <Checkbox
           onChange={handleCheckboxChange}
-          id={todoElement.id}
           checked={todoElement.isDone}
         />
         <Button onClick={onDelete}>DELETE</Button>
