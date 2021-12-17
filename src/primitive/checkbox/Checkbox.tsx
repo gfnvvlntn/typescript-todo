@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import "./checkbox.module.css";
+import styled from "styled-components";
 
 interface CheckboxProps {
   onChange: any;
@@ -7,7 +7,14 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ onChange, checked }: CheckboxProps) => {
-  return <input type="checkbox" checked={checked} onChange={onChange} />;
+  return (
+    <CheckboxWrapper type="checkbox" checked={checked} onChange={onChange} />
+  );
 };
 
 export default memo(Checkbox);
+
+const CheckboxWrapper = styled("input")`
+  width: 15px;
+  height: 15px;
+`;

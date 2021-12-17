@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "store/hooks";
 import { TodoTypes } from "types";
-import TodoItem from "./TodoItem";
+import TodoItem from "../todo-item/TodoItem";
 
 const TodoList = () => {
   const todos: TodoTypes[] = useAppSelector((state) => state.todos.todoList);

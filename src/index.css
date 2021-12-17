@@ -13,12 +13,6 @@ h2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 ul {
     margin: 0;
     padding: 0;

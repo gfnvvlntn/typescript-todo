@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import styles from "./input.module.css";
+import styled from "styled-components";
 
 interface InputProps {
   id?: number;
@@ -11,8 +11,7 @@ interface InputProps {
 
 const Input = ({ value, id, onChange, onBlur, placeholder }: InputProps) => {
   return (
-    <input
-      className={styles.inp}
+    <InputWrapper
       type="text"
       value={value}
       id={id?.toString()}
@@ -24,3 +23,15 @@ const Input = ({ value, id, onChange, onBlur, placeholder }: InputProps) => {
 };
 
 export default memo(Input);
+
+const InputWrapper = styled("input")`
+  width: 70%;
+  border: none;
+  background-color: inherit;
+  color: white;
+  outline: none;
+  font-size: 20px;
+  &::placeholder {
+    font-size: 14px;
+  }
+`;

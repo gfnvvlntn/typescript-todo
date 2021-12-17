@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import styles from "./bodyTodo.module.css";
 import Button from "primitive/button/Button";
 import Checkbox from "primitive/checkbox/Checkbox";
 import { useAppDispatch } from "store/hooks";
 import { selectAllTodoItem, deleteAllSelectedTodoItem } from "store/slice";
+import styled from "styled-components";
 
-const BodyTodos = () => {
+const TodoTitle = () => {
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -22,17 +22,26 @@ const BodyTodos = () => {
   };
 
   return (
-    <>
-      <div className={styles.content}>
-        <h2>todo list</h2>
-        <div className={styles.title}>
-          <Checkbox checked={isChecked} onChange={handleChange} />
-          <Button onClick={handleButtonClick}>DELETE ALL</Button>
-        </div>
-      </div>
-      <hr />
-    </>
+    <TodoTitleContainer>
+      <ActionTodoTitle>
+        <Checkbox checked={isChecked} onChange={handleChange} />
+        <Button onClick={handleButtonClick}>DELETE ALL</Button>
+      </ActionTodoTitle>
+    </TodoTitleContainer>
   );
 };
 
-export default React.memo(BodyTodos);
+export default React.memo(TodoTitle);
+
+const TodoTitleContainer = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ActionTodoTitle = styled("div")`
+  width: 23%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
