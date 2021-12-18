@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "store/hooks";
 import { selectTodoItem, deleteTodoItem } from "store/slice";
 
@@ -6,6 +6,7 @@ import EditTodoItem from "../edit-todo-item/EditTodoItem";
 import Checkbox from "primitive/checkbox/Checkbox";
 import Button from "primitive/button/Button";
 import { TodoTypes } from "types";
+import { ReactComponent as Delete } from "assets/image/icons/delete_white.svg";
 import styled from "styled-components";
 
 type TodoItemProps = {
@@ -13,10 +14,16 @@ type TodoItemProps = {
 };
 
 const TodoItem = ({ todoElement }: TodoItemProps) => {
+  const [isChecked, setIsChecked] = useState(todoElement.isDone);
   const dispatch = useAppDispatch();
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(selectTodoItem({ checked: e.target.checked, id: todoElement.id }));
+  useEffect(() => {
+    setIsChecked(todoElement.isDone);
+  }, [todoElement.isDone]);
+
+  const handleClick = () => {
+    dispatch(selectTodoItem({ checked: isChecked, id: todoElement.id }));
+    setIsChecked(!isChecked);
   };
 
   const onDelete = () => {
@@ -28,10 +35,13 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
       <EditTodoItem todoElement={todoElement} />
       <ActionTodoElement>
         <Checkbox
-          onChange={handleCheckboxChange}
-          checked={todoElement.isDone}
+          onClick={handleClick}
+          isChecked={isChecked}
+          variant={"white"}
         />
-        <Button onClick={onDelete}>DELETE</Button>
+        <Button onClick={onDelete}>
+          <Delete />
+        </Button>
       </ActionTodoElement>
     </TodoElement>
   );
@@ -41,7 +51,7 @@ export default React.memo(TodoItem);
 
 const TodoElement = styled("li")`
   width: 100%;
-  height: 80px;
+  height: 60px;
   background-color: var(--background-list);
   border-radius: 5px;
   display: flex;
@@ -51,8 +61,12 @@ const TodoElement = styled("li")`
 `;
 
 const ActionTodoElement = styled("div")`
-  width: 20%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+`;
+
+const Text = styled("p")`
+  color: white;
+  font-size: 14px;
 `;

@@ -1,20 +1,38 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import { ReactComponent as Off } from "assets/image/icons/check_box_outline_blank_white.svg";
+import { ReactComponent as On } from "assets/image/icons/check_box_white.svg";
+import { ReactComponent as OffBlack } from "assets/image/icons/check_box_outline_blank_black.svg";
+import { ReactComponent as OnBlack } from "assets/image/icons/check_box_black.svg";
 
 interface CheckboxProps {
-  onChange: any;
-  checked: boolean;
+  onClick: any;
+  isChecked: boolean;
+  variant: string;
 }
 
-const Checkbox = ({ onChange, checked }: CheckboxProps) => {
+const Checkbox = ({ onClick, isChecked, variant }: CheckboxProps) => {
   return (
-    <CheckboxWrapper type="checkbox" checked={checked} onChange={onChange} />
+    <CheckboxWrapper onClick={onClick}>
+      {variant === "white" ? (
+        isChecked ? (
+          <On />
+        ) : (
+          <Off />
+        )
+      ) : isChecked ? (
+        <OnBlack />
+      ) : (
+        <OffBlack />
+      )}
+    </CheckboxWrapper>
   );
 };
 
 export default memo(Checkbox);
 
-const CheckboxWrapper = styled("input")`
-  width: 15px;
-  height: 15px;
+const CheckboxWrapper = styled("button")`
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
 `;

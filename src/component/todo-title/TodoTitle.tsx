@@ -3,13 +3,14 @@ import Button from "primitive/button/Button";
 import Checkbox from "primitive/checkbox/Checkbox";
 import { useAppDispatch } from "store/hooks";
 import { selectAllTodoItem, deleteAllSelectedTodoItem } from "store/slice";
+import { ReactComponent as DeleteAll } from "assets/image/icons/delete_black.svg";
 import styled from "styled-components";
 
 const TodoTitle = () => {
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleChange = () => {
+  const handleClick = () => {
     setIsChecked(!isChecked);
     dispatch(selectAllTodoItem(isChecked));
   };
@@ -24,8 +25,14 @@ const TodoTitle = () => {
   return (
     <TodoTitleContainer>
       <ActionTodoTitle>
-        <Checkbox checked={isChecked} onChange={handleChange} />
-        <Button onClick={handleButtonClick}>DELETE ALL</Button>
+        <Checkbox
+          isChecked={isChecked}
+          onClick={handleClick}
+          variant={"black"}
+        />
+        <Button onClick={handleButtonClick}>
+          <DeleteAll />
+        </Button>
       </ActionTodoTitle>
     </TodoTitleContainer>
   );
@@ -40,7 +47,6 @@ const TodoTitleContainer = styled("div")`
 `;
 
 const ActionTodoTitle = styled("div")`
-  width: 23%;
   display: flex;
   align-items: center;
   justify-content: space-around;

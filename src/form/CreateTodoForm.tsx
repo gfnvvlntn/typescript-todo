@@ -4,6 +4,7 @@ import Button from "primitive/button/Button";
 import { useAppDispatch } from "store/hooks";
 import { createTodoItem } from "store/slice";
 import styled from "styled-components";
+import { ReactComponent as Add } from "../assets/image/icons/add_white.svg";
 
 function CreateTodoForm() {
   const [newTitle, setNewTitle] = useState("");
@@ -32,7 +33,9 @@ function CreateTodoForm() {
         onChange={handleChange}
         placeholder="enter the title todo"
       />
-      <Button onClick={handlerSubmit}>CREATE</Button>
+      <Button onClick={handlerSubmit}>
+        <Add />
+      </Button>
     </TodoForm>
   );
 }
@@ -41,7 +44,7 @@ export default React.memo(CreateTodoForm);
 
 const TodoForm = styled("div")`
   width: 100%;
-  height: 80px;
+  height: 60px;
   background-color: var(--background-list);
   display: flex;
   align-items: center;

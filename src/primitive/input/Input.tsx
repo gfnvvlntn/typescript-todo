@@ -30,8 +30,8 @@ const InputWrapper = styled("input")`
   background-color: inherit;
   color: white;
   outline: none;
-  font-size: 20px;
+  font-size: 14px;
   &::placeholder {
-    font-size: 14px;
+    font-size: 10px;
   }
 `;
