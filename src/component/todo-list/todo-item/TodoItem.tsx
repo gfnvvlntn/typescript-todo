@@ -65,8 +65,3 @@ const ActionTodoElement = styled("div")`
   align-items: center;
   justify-content: space-around;
 `;
-
-const Text = styled("p")`
-  color: white;
-  font-size: 14px;
-`;

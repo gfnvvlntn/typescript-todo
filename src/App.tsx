@@ -1,19 +1,22 @@
 import React from "react";
-import Todos from "pages/todos/Todos";
 import styled from "styled-components";
+import Navbar from "./component/navbar/Navbar";
+import Routers from "./routes/routers";
 
 const App = () => {
   return (
-    <TodosContainer>
-      <Todos />
-    </TodosContainer>
+    <Container>
+      <Navbar />
+      <Routers />
+    </Container>
   );
 };
 
 export default App;
 
-const TodosContainer = styled("div")`
+const Container = styled("div")`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;

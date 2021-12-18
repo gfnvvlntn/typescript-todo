@@ -9,7 +9,6 @@ const slice = createSlice({
   reducers: {
     createTodoItem(state, action) {
       state.todoList.unshift(action.payload);
-      console.log(state);
     },
     deleteAllSelectedTodoItem(state) {
       if (state.todoList.length === 0) return;
