@@ -5,20 +5,24 @@ import BodyTodos from "component/todo-title/TodoTitle";
 import TodoList from "component/todo-list/todo-list/TodoList";
 
 import styled from "styled-components";
+import { TodoTypes } from "types";
+import { useAppSelector } from "store/hooks";
 
 const Todos = () => {
+  const todos: TodoTypes[] = useAppSelector((state) => state.todos.todoList);
+
   return (
-    <TodoContainer>
+    <Container>
       <CreateTodoForm />
       <BodyTodos />
-      <TodoList />
-    </TodoContainer>
+      <TodoList todos={todos} />
+    </Container>
   );
 };
 
 export default React.memo(Todos);
 
-const TodoContainer = styled("div")`
+const Container = styled("div")`
   max-width: 600px;
   width: 100%;
   padding: 0 40px;

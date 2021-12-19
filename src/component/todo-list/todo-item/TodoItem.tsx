@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "store/hooks";
-import { selectTodoItem, deleteTodoItem } from "store/slice";
+import { selectTodoItem, deleteTodoItem } from "store/TodoListSlice";
 
 import EditTodoItem from "../edit-todo-item/EditTodoItem";
 import Checkbox from "primitive/checkbox/Checkbox";
@@ -8,6 +8,8 @@ import Button from "primitive/button/Button";
 import { TodoTypes } from "types";
 import { ReactComponent as Delete } from "assets/image/icons/delete_white.svg";
 import styled from "styled-components";
+import Flex from "../../../primitive/flex/Flex";
+import { addHistoryTodoItem } from "../../../store/HistoryTodoSlice";
 
 type TodoItemProps = {
   todoElement: TodoTypes;
@@ -23,6 +25,10 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
 
   const handleClick = () => {
     dispatch(selectTodoItem({ checked: isChecked, id: todoElement.id }));
+    dispatch(addHistoryTodoItem(todoElement));
+    setTimeout(() => {
+      dispatch(deleteTodoItem(todoElement.id));
+    }, 2000);
     setIsChecked(!isChecked);
   };
 
@@ -33,7 +39,7 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
   return (
     <TodoElement>
       <EditTodoItem todoElement={todoElement} />
-      <ActionTodoElement>
+      <Flex justifyContent={"space-around"}>
         <Checkbox
           onClick={handleClick}
           isChecked={isChecked}
@@ -42,7 +48,7 @@ const TodoItem = ({ todoElement }: TodoItemProps) => {
         <Button onClick={onDelete}>
           <Delete />
         </Button>
-      </ActionTodoElement>
+      </Flex>
     </TodoElement>
   );
 };
@@ -58,10 +64,4 @@ const TodoElement = styled("li")`
   justify-content: space-around;
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-`;
-
-const ActionTodoElement = styled("div")`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 `;

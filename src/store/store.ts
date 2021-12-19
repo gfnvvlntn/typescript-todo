@@ -1,5 +1,6 @@
 import { configureStore, Middleware } from "@reduxjs/toolkit";
-import todoReducer from "./slice";
+import todoReducer from "./TodoListSlice";
+import historyReducer from "./HistoryTodoSlice";
 
 const localStorageMiddleware: Middleware = ({ getState }) => {
   return (next) => (action) => {
@@ -18,6 +19,7 @@ const reHydrateStore = () => {
 const store = configureStore({
   reducer: {
     todos: todoReducer,
+    history: historyReducer,
   },
   preloadedState: reHydrateStore(),
   middleware: (getDefaultMiddleware) =>

@@ -1,10 +1,12 @@
 import React from "react";
-import { useAppSelector } from "store/hooks";
 import { TodoTypes } from "types";
 import TodoItem from "../todo-item/TodoItem";
 
-const TodoList = () => {
-  const todos: TodoTypes[] = useAppSelector((state) => state.todos.todoList);
+type TodoListProps = {
+  todos: TodoTypes[];
+};
+
+const TodoList = ({ todos }: TodoListProps) => {
   return (
     <>
       {todos.map((el) => {

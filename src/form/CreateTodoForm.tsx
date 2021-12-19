@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "primitive/input/Input";
 import Button from "primitive/button/Button";
 import { useAppDispatch } from "store/hooks";
-import { createTodoItem } from "store/slice";
+import { createTodoItem } from "store/TodoListSlice";
 import styled from "styled-components";
 import { ReactComponent as Add } from "../assets/image/icons/add_white.svg";
 
@@ -27,7 +27,7 @@ function CreateTodoForm() {
   };
 
   return (
-    <TodoForm>
+    <TodoFormContainer>
       <Input
         value={newTitle}
         onChange={handleChange}
@@ -36,13 +36,13 @@ function CreateTodoForm() {
       <Button onClick={handlerSubmit}>
         <Add />
       </Button>
-    </TodoForm>
+    </TodoFormContainer>
   );
 }
 
 export default React.memo(CreateTodoForm);
 
-const TodoForm = styled("div")`
+const TodoFormContainer = styled("div")`
   width: 100%;
   height: 60px;
   background-color: var(--background-list);

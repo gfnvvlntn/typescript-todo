@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { useAppDispatch } from "store/hooks";
-import { editTodoItem } from "store/slice";
+import { editTodoItem } from "store/TodoListSlice";
 
 import Input from "primitive/input/Input";
 

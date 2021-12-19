@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TodoTypes } from "types";
 
-const slice = createSlice({
+const todoListSlice = createSlice({
   name: "todos",
   initialState: {
     todoList: [] as TodoTypes[],
@@ -46,5 +46,5 @@ export const {
   deleteTodoItem,
   deleteAllSelectedTodoItem,
   selectTodoItem,
-} = slice.actions;
-export default slice.reducer;
+} = todoListSlice.actions;
+export default todoListSlice.reducer;
